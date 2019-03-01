@@ -21,17 +21,20 @@ public class GamePanel extends JPanel {
     @Override
     public void paint(Graphics g) {
         // ve anh
-        background.render(g);
-        player.render(g);
-        enemy.render(g);
+        for (int i = 0; i < GameObject.objects.size(); i++) {
+            GameObject object = GameObject.objects.get(i);
+            if (object.active) {
+                object.render(g);
+            }
+        }
     }
 
     public void gameLoop() {
         long lastTime = 0;
         long delay = 1000 / 60;
-        while(true) {
+        while (true) {
             long currentTime = System.currentTimeMillis();
-            if(currentTime - lastTime >= delay) {
+            if (currentTime - lastTime >= delay) {
                 // ve anh + chay logic
                 runAll();
                 renderAll();
@@ -45,8 +48,11 @@ public class GamePanel extends JPanel {
     }
 
     private void runAll() {
-        background.run();
-        player.run();
-        enemy.run();
+        for (int i = 0; i < GameObject.objects.size(); i++) {
+            GameObject object = GameObject.objects.get(i);
+            if (object.active) {
+                object.run();
+            }
+        }
     }
 }
