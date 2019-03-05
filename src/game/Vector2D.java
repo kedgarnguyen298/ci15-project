@@ -23,14 +23,26 @@ public class Vector2D {
         this.y = y;
     }
 
+    public void set(Vector2D other) {
+        this.set(other.x, other.y);
+    }
+
     public void add(double x, double y) {
         this.x += x;
         this.y += y;
     }
 
+    public void add(Vector2D other) {
+        this.add(other.x, other.y);
+    }
+
     public void minus(double x, double y) {
         this.x -= x;
         this.y -= y;
+    }
+
+    public void minus(Vector2D other) {
+        this.minus(other.x, other.y);
     }
 
     public void scale(double rate) {

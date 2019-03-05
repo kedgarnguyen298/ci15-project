@@ -21,7 +21,7 @@ public class SpriteUtils {
     }
 
     public static void renderAtCenter(Graphics graphics, BufferedImage image, double x, double y) {
-        graphics.drawImage(image, (int)(x - (double)image.getWidth() / 2), (int)(y - (double) image.getHeight() / 2), null);
+        graphics.drawImage(image, (int) (x - (double) image.getWidth() / 2), (int) (y - (double) image.getHeight() / 2), null);
     }
 
     public static BufferedImage maskWhite(BufferedImage image) {
@@ -39,5 +39,25 @@ public class SpriteUtils {
         }
 
         return returnImage;
+    }
+
+    public static BufferedImage toBufferedImage(Image image) {
+        if (image instanceof BufferedImage) {
+            return (BufferedImage) image;
+        }
+        BufferedImage bufferedImage = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2D = bufferedImage.createGraphics();
+        g2D.drawImage(image, 0, 0, null);
+        g2D.dispose();
+        return bufferedImage;
+    }
+
+    public static BufferedImage scaleImage(Image image, int width, int height) {
+        Image scaledImage = image.getScaledInstance(width, height, Image.SCALE_DEFAULT);
+        return toBufferedImage(scaledImage);
+    }
+
+    public static void main(String[] args) {
+        
     }
 }
