@@ -3,6 +3,7 @@ package game.player;
 import game.GameObject;
 import game.GameWindow;
 import game.Settings;
+import game.renderer.AnimationRenderer;
 import tklibs.SpriteUtils;
 
 import java.awt.*;
@@ -18,15 +19,18 @@ public class Player extends GameObject {
 
     public Player() {
 //        image = SpriteUtils.loadImage("assets/images/players/straight/0.png");
-        images = new ArrayList<>();
-        images.add(SpriteUtils.loadImage("assets/images/players/straight/0.png"));
-        images.add(SpriteUtils.loadImage("assets/images/players/straight/1.png"));
-        images.add(SpriteUtils.loadImage("assets/images/players/straight/2.png"));
-        images.add(SpriteUtils.loadImage("assets/images/players/straight/3.png"));
-        images.add(SpriteUtils.loadImage("assets/images/players/straight/4.png"));
-        images.add(SpriteUtils.loadImage("assets/images/players/straight/5.png"));
-        images.add(SpriteUtils.loadImage("assets/images/players/straight/6.png"));
-
+//        images = new ArrayList<>();
+//        images.add(SpriteUtils.loadImage("assets/images/players/straight/0.png"));
+//        images.add(SpriteUtils.loadImage("assets/images/players/straight/1.png"));
+//        images.add(SpriteUtils.loadImage("assets/images/players/straight/2.png"));
+//        images.add(SpriteUtils.loadImage("assets/images/players/straight/3.png"));
+//        images.add(SpriteUtils.loadImage("assets/images/players/straight/4.png"));
+//        images.add(SpriteUtils.loadImage("assets/images/players/straight/5.png"));
+//        images.add(SpriteUtils.loadImage("assets/images/players/straight/6.png"));
+        renderer = new AnimationRenderer(
+                "assets/images/players/straight",
+                10
+        );
         position.set(200, 500);
         fireCount = 0;
         bulletType = 1;
@@ -61,21 +65,23 @@ public class Player extends GameObject {
         }
 
         this.velocity.set(vX, vY);
-        this.velocity.setLength(2);
+        this.velocity.setLength(1);
     }
 
     private void playerLimit() {
-        if(position.x < 0) { // limit player
-            position.x = 0;
+        double offsetWidth = anchor.x * Settings.PLAYER_WIDTH;
+        double offsetHeight = anchor.y * Settings.PLAYER_HEIGHT;
+        if(position.x < offsetWidth) { // limit player
+            position.x = offsetWidth;
         }
-        if(position.x > Settings.BACKGROUND_WIDTH - Settings.PLAYER_WIDTH) {
-            position.x = Settings.BACKGROUND_WIDTH - Settings.PLAYER_WIDTH;
+        if(position.x > Settings.BACKGROUND_WIDTH - offsetWidth) {
+            position.x = Settings.BACKGROUND_WIDTH - offsetWidth;
         }
-        if(position.y < 0) {
-            position.y = 0;
+        if(position.y < offsetHeight) {
+            position.y = offsetHeight;
         }
-        if(position.y > Settings.GAME_HEIGHT - Settings.PLAYER_HEIGHT) {
-            position.y = Settings.GAME_HEIGHT - Settings.PLAYER_HEIGHT;
+        if(position.y > Settings.GAME_HEIGHT - offsetHeight) {
+            position.y = Settings.GAME_HEIGHT - offsetHeight;
         }
     }
 
