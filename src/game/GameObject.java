@@ -1,7 +1,6 @@
 package game;
 
 import game.physics.BoxCollider;
-import game.player.Player;
 import game.renderer.Renderer;
 
 import java.awt.*;

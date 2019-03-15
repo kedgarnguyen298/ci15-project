@@ -5,7 +5,7 @@ import game.GameObject;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Renderer {
+public abstract class Renderer {
     public static void drawImage(BufferedImage image
             , Graphics g, GameObject master) {
         g.drawImage(
@@ -16,7 +16,5 @@ public class Renderer {
         );
     }
 
-    public void render(Graphics g, GameObject master) {
-
-    }
+    public abstract void render(Graphics g, GameObject master);
 }

@@ -13,6 +13,7 @@ public class AnimationRenderer extends Renderer{
     public int currentImageIndex;
     public int changeImageCount;
     public int frameChange;
+    public boolean isOnce;
 
     public AnimationRenderer(ArrayList<BufferedImage> images
             , int frameChange) {
@@ -20,9 +21,16 @@ public class AnimationRenderer extends Renderer{
         this.currentImageIndex = 0;
         this.changeImageCount = 0;
         this.frameChange = frameChange;
+        this.isOnce = false;
     }
 
-    public AnimationRenderer(String directoryPath, int frameChange) {
+    public AnimationRenderer(String directoryPath
+            , int frameChange) {
+        this(directoryPath, frameChange, false);
+    }
+
+    public AnimationRenderer(String directoryPath
+            , int frameChange, boolean isOnce) {
         File folder = new File(directoryPath);
         ArrayList<BufferedImage> images = new ArrayList<>();
         for(String fileName : folder.list()) {
@@ -32,6 +40,7 @@ public class AnimationRenderer extends Renderer{
         this.currentImageIndex = 0;
         this.changeImageCount = 0;
         this.frameChange = frameChange;
+        this.isOnce = isOnce;
     }
 
     @Override
@@ -48,7 +57,11 @@ public class AnimationRenderer extends Renderer{
         if(changeImageCount > frameChange) {
             currentImageIndex++;
             if(currentImageIndex >= images.size()) {
-                currentImageIndex = 0;
+                if(isOnce) {
+                    master.deactive();
+                } else {
+                    currentImageIndex = 0;
+                }
             }
             changeImageCount = 0;
         }

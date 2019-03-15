@@ -1,20 +1,13 @@
 package game;
 
-import game.enemy.Enemy;
-import game.player.Player;
-
 import javax.swing.*;
 import java.awt.*;
 
 public class GamePanel extends JPanel {
     Background background;
-    Player player;
-    Enemy enemy;
 
     public GamePanel() {
         background = new Background();
-        player = new Player();
-        enemy = new Enemy();
     }
 
     public void gameLoop() {
