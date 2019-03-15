@@ -1,6 +1,7 @@
 package game.player;
 
 import game.GameObject;
+import game.GameWindow;
 import game.Settings;
 import game.physics.BoxCollider;
 
@@ -11,7 +12,7 @@ public class Player extends GameObject {
     public Player() {
         collider = new BoxCollider(this, Settings.PLAYER_WIDTH, Settings.PLAYER_HEIGHT);
         renderer = new PlayerRenderer();
-        position. set(300, 50);
+        position.set(50, 300);
     }
 
     @Override
@@ -22,5 +23,14 @@ public class Player extends GameObject {
     @Override
     public void run() {
         super.run();
+        playerMove();
+    }
+
+    private void playerMove() {
+        if(GameWindow.isJumpPress) {
+            position.y -= 10;
+        } else {
+            position.y +=4;
+        }
     }
 }

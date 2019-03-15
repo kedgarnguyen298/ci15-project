@@ -1,13 +1,17 @@
 package game;
 
+import game.player.Player;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class GamePanel extends JPanel {
     Background background;
+    Player player;
 
     public GamePanel() {
         background = new Background();
+        player = new Player();
     }
 
     public void gameLoop() {
