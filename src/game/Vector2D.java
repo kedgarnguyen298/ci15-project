@@ -73,4 +73,9 @@ public class Vector2D {
             this.y = length * Math.sin(angle);
         }
     }
+
+    @Override
+    public String toString() {
+        return String.format("(x: %s, y: %s)", x, y);
+    }
 }

@@ -10,22 +10,40 @@ import tklibs.SpriteUtils;
 import java.awt.*;
 
 public class PlayerRenderer extends Renderer {
-    SingleImageRenderer jumpAnimation;
-    SingleImageRenderer flyAnimation;
-    AnimationRenderer deadAnimation;
+    AnimationRenderer upAnimation;
+    AnimationRenderer headAnimation;
+    AnimationRenderer downAnimation;
 
     public PlayerRenderer() {
-        jumpAnimation = new SingleImageRenderer(SpriteUtils.loadImage("assets/sprites/bluebird-midflap.png"));
-        flyAnimation = new SingleImageRenderer(SpriteUtils.loadImage("assets/sprites/bluebird-upflap.png"));
+        upAnimation = new AnimationRenderer("assets/sprites/bluebird-upflap", 10);
+        headAnimation = new AnimationRenderer("assets/sprites/bluebird-midflap", 10);
+        downAnimation = new AnimationRenderer("assets/sprites/bluebird-downflap", 10);
     }
 
+    int renderCount;
     @Override
     public void render(Graphics g, GameObject master) {
         Player player = (Player) master;
-        if(GameWindow.isJumpPress) {
-            jumpAnimation.render(g, master);
+        renderCount++;
+        if(renderCount % 2 == 0) {
+            return;
+        }
+        if(master.velocity.y < 0) {
+            downAnimation.render(g, master);
+        } else if(master.velocity.y > 0) {
+            upAnimation.render(g, master);
         } else {
-            flyAnimation.render(g, master);
+            headAnimation.render(g, master);
         }
     }
+
+//    @Override
+//    public void render(Graphics g, GameObject master) {
+//        Player player = (Player) master;
+//        if(GameWindow.isJumpPress) {
+//            jumpAnimation.render(g, master);
+//        } else {
+//            fallAnimation.render(g, master);
+//        }
+//    }
 }

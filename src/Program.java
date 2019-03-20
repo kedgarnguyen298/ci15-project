@@ -17,7 +17,7 @@ public class Program {
 
         GamePanel panel = new GamePanel();
         panel.setPreferredSize(
-                new Dimension(Settings.BACKGROUND_WIDTH, Settings.BACKGROUND_HEIGHT)
+                new Dimension(Settings.BACKGROUND_WIDTH / 2, Settings.BACKGROUND_HEIGHT)
         );
         window.add(panel);
         window.pack();

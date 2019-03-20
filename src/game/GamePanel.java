@@ -1,16 +1,18 @@
 package game;
 
+import game.background.Background;
+import game.background.BackgroundManager;
 import game.player.Player;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class GamePanel extends JPanel {
-    Background background;
+    BackgroundManager backgroundManager;
     Player player;
 
     public GamePanel() {
-        background = new Background();
+        backgroundManager = new BackgroundManager();
         player = new Player();
     }
 
@@ -34,6 +36,7 @@ public class GamePanel extends JPanel {
     @Override
     public void paint(Graphics g) {
         // ve anh
+        g.fillRect(0, 0, Settings.BACKGROUND_WIDTH, Settings.BACKGROUND_HEIGHT);
         for(int i = 0; i < GameObject.objects.size(); i++) {
             GameObject object = GameObject.objects.get(i);
             if(object.active) {
